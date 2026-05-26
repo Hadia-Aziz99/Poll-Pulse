@@ -1,253 +1,320 @@
-# PollPulse - Student Voice, Feedback and Election Portal
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Great+Vibes&size=100&duration=1600&pause=999999&color=FF4FD8&center=true&vCenter=true&repeat=false&width=1000&height=170&lines=PollPulse" alt="PollPulse" />
+</p>
+<h3 align="center">
+  ✨ Student Voice • Smart Feedback • Digital Elections • Sentiment Insights ✨
+</h3>
 
-PollPulse is a full-stack Web Technologies semester project built with Angular, TypeScript, ASP.NET Core Web API, and MongoDB. The application allows university students to register/login, view class-specific elections, cast one secure vote per election, submit category-wise feedback, and view dashboards. Admin users can manage elections, academic master data, feedback records, sentiment reports, and audit logs.
 
-## Team Details
 
-| Member | Roll No. | Responsibility | GitHub Username |
-|---|---|---|---|
-| Member 1 | Add roll no. | Frontend pages and routing | Add username |
-| Member 2 | Add roll no. | Backend APIs and database | Add username |
-| Member 3 | Add roll no. | Report, testing and demo | Add username |
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
+  <img src="https://img.shields.io/badge/Backend-ASP.NET%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/Database-MongoDB-00E5A8?style=for-the-badge&logo=mongodb&logoColor=black" />
+  <img src="https://img.shields.io/badge/Auth-JWT-FFB703?style=for-the-badge" />
+</p>
 
-Update this table before final GitHub submission so every member can defend their own contribution.
+<p align="center">
+  <b>A modern full-stack web portal for student elections, feedback collection, sentiment reporting, and admin management.</b>
+</p>
 
-## Technology Stack
 
-- Frontend: Angular + TypeScript + HTML + CSS
-- Backend: ASP.NET Core Web API using C#
-- Database: MongoDB
-- Authentication: JWT Bearer Token Authentication
-- Styling: Responsive CSS using Bootstrap utility classes, custom CSS, Flexbox/Grid
 
-## Folder Structure
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=5&color=0:ff4fd8,35:7c3aed,70:00c2ff,100:00e5a8" />
+</p>
+
+## 🌸 About PollPulse
+
+**PollPulse** is a stylish and secure student voice platform designed to make university feedback and elections easier, faster, and more transparent.
+
+The application allows students to:
+
+- register and log in securely,
+- view elections related to their class,
+- vote only once in each election,
+- submit feedback for different university services,
+- and view election results.
+
+The admin side allows university staff to manage elections, candidates, feedback records, academic master data, sentiment reports, and audit logs from a protected dashboard.
+
+---
+
+## 👩‍💻 Created & Administered By
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Huda%20Tariq-Creator-FF4FD8?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Taha%20Tariq-Creator-7C3AED?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Hadia%20Aziz-Creator-00C2FF?style=for-the-badge" />
+</p>
+
+---
+
+## 💎 Main Highlights
+
+| Area | Details |
+|---|---|
+| 🎓 Student Portal | Registration, login, dashboard, class elections, voting, feedback |
+| 🗳️ Election System | CR/GR elections, candidate listing, vote casting, result calculation |
+| 💬 Feedback System | Teacher, course, transport, cafeteria, sports, library, and event feedback |
+| 📊 Sentiment Reports | Positive, neutral, and negative feedback analysis |
+| 🛡️ Admin Panel | Dashboard, election management, feedback management, CRUD modules |
+| 🔐 Security | JWT authentication, route guards, role-based API access |
+| 🖼️ UI Design | Responsive layout, custom theme, Unsplash visuals, modern cards |
+
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=5&color=0:00e5a8,35:00c2ff,70:7c3aed,100:ff4fd8" />
+</p>
+
+## 🌟 Student Features
+
+| Feature | Description |
+|---|---|
+| Student Registration | Students can create accounts with form validation. |
+| Student Login | Secure login using JWT authentication. |
+| Student Dashboard | Displays elections, feedback activity, and student-specific information. |
+| Class-Based Elections | Students only see elections related to their own degree, year, and section. |
+| Secure Voting | A student can vote only once in each election. |
+| Election Results | Students can view election results after voting or when available. |
+| Feedback Submission | Students can submit feedback in different categories. |
+| Recent Feedback Activity | Dashboard shows recent feedback records. |
+| Protected Routes | Student pages are protected using Angular route guards. |
+
+---
+
+## 🗳️ Election Features
+
+| Feature | Description |
+|---|---|
+| CR / GR Elections | Supports class representative and group representative elections. |
+| Dynamic Election Listing | Elections are fetched dynamically from the backend. |
+| Election Detail Page | Each election has a separate details page. |
+| Candidate Display | Candidates are shown dynamically for each election. |
+| One Vote Per Student | Duplicate voting is prevented. |
+| Class Authorization | Students cannot vote in elections outside their own class. |
+| Vote Counting | Votes are counted dynamically. |
+| Result Percentages | Percentages are calculated and displayed. |
+| Closed Election Results | Closed election results remain available. |
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=5&color=0:00e5a8,35:00c2ff,70:7c3aed,100:ff4fd8" />
+</p>
+
+
+## 💬 Feedback Categories
+
+PollPulse includes structured feedback modules for different university services.
+
+| Category | Purpose |
+|---|---|
+| 👨‍🏫 Teacher Feedback | Teaching quality, communication, and delivery |
+| 📚 Course Feedback | Course content, difficulty, and learning experience |
+| 🚌 Transport Feedback | Timing, routes, safety, and service |
+| 🍽️ Cafeteria Feedback | Food quality, price, cleanliness, and service |
+| ⚽ Sports Feedback | Facilities, equipment, and activities |
+| 📖 Library Feedback | Books, seating, timing, and environment |
+| 🎉 Event Feedback | Seminars, workshops, trips, and university events |
+
+Each feedback form supports:
+
+- rating input,
+- comments,
+- suggestions,
+- category-based storage,
+- sentiment classification,
+- and recent feedback display.
+
+---
+
+## 📊 Sentiment Analysis
+
+PollPulse includes a basic sentiment analysis system for student feedback.
+
+| Sentiment | Meaning |
+|---|---|
+| 😊 Positive | Feedback contains positive expressions. |
+| 😐 Neutral | Feedback does not strongly show positive or negative emotion. |
+| 🙁 Negative | Feedback contains negative expressions. |
+
+Admin users can view:
+
+- positive feedback percentage,
+- neutral feedback percentage,
+- negative feedback percentage,
+- total feedback count,
+- category-wise feedback records,
+- and department-level feedback summary.
+
+
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=5&color=0:ff4fd8,35:7c3aed,70:00c2ff,100:00e5a8" />
+</p>
+
+## 🛡️ Admin Features
+
+| Feature | Description |
+|---|---|
+| Admin Login | Separate secure login for admin users. |
+| Admin Dashboard | Displays students, elections, votes, feedback, and system metrics. |
+| Create Elections | Admin can create new elections with candidates. |
+| Manage Elections | Admin can activate, close, view, and delete elections. |
+| Election Results | Admin can view detailed election results. |
+| Feedback Management | Admin can view and filter student feedback. |
+| Sentiment Reports | Admin can monitor positive, neutral, and negative feedback trends. |
+| Academic Masters | Admin can manage teachers, courses, events, and class sections. |
+| Audit Logs | Important system activities are stored and displayed. |
+| Protected Admin Routes | Admin pages are protected using role-based guards. |
+
+---
+
+## 🧩 Admin CRUD Modules
+
+| Module | Operations |
+|---|---|
+| Teachers | Add, view, update, and delete teachers |
+| Courses | Add, view, update, and delete courses |
+| Events | Add, view, update, and delete events |
+| Class Sections | Add, view, update, and delete class sections |
+
+---
+
+## 🎨 UI & Design Highlights
+
+- modern landing page,
+- clean student dashboard,
+- professional admin panel,
+- responsive frontend layout,
+- stylish feedback category cards,
+- Unsplash-based high-quality visuals,
+- animated interface effects,
+- Font Awesome icons,
+- separate CSS files for clean styling,
+- pink, purple, blue, and aqua theme.
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=5&color=0:00e5a8,35:00c2ff,70:7c3aed,100:ff4fd8" />
+</p>
+
+
+## 🧠 Tech Stack
+
+### Frontend
+
+| Technology | Purpose |
+|---|---|
+| Angular | Frontend framework |
+| TypeScript | Frontend logic |
+| HTML | Page structure |
+| CSS | Styling and responsive layout |
+| Angular Router | Page navigation |
+| Angular Guards | Route protection |
+| Angular Services | API communication |
+| Reactive Forms | Login, registration, feedback, and admin forms |
+| HTTP Client | Backend API integration |
+
+### Backend
+
+| Technology | Purpose |
+|---|---|
+| ASP.NET Core Web API | REST API backend |
+| C# | Backend programming language |
+| MongoDB Driver | Database communication |
+| JWT Bearer Authentication | Secure API access |
+| BCrypt.Net | Password hashing |
+| CORS | Frontend-backend communication |
+| Dependency Injection | Service management |
+
+### Database
+
+| Database | Purpose |
+|---|---|
+| MongoDB | Stores users, admins, elections, candidates, votes, feedback, master records, and audit logs |
+
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&height=5&color=0:00e5a8,35:00c2ff,70:7c3aed,100:ff4fd8" />
+</p>
+
+## 🗂️ Project Folder Structure
 
 ```text
 Pollpulse-final-submission/
-├── frontend/     Angular frontend application
-├── backend/      ASP.NET Core Web API project
-├── database/     MongoDB schema, seed data notes and setup guide
-├── report/       Project report PDF/Markdown and screenshot checklist
-├── demo/         Video demo script and final video-link placeholder
-└── README.md     Main project setup and defense guide
-```
-
-## Main Features
-
-- Attractive landing page with dynamic metrics and animations
-- Student registration and login with validation
-- Admin login with protected admin panel
-- Student dashboard with dynamic database data
-- Dynamic elections list, election detail route, voting and result page
-- Feedback module with category-wise forms and sentiment classification
-- Admin dashboard with metrics, audit logs, feedback, sentiment and master-data pages
-- Four full CRUD API controllers for teachers, courses, events and class sections
-- MongoDB seed data for demo users, admins, classes, elections, candidates, votes and feedback
-- Vanilla JavaScript DOM feature through document query selection, IntersectionObserver reveal animation, theme switching and scroll handling in Angular root component
-
-## Demo Credentials
-
-### Student Login
-
-```text
-Email: 2502077@students.au.edu.pk
-Password: Student@123
-```
-
-Other seeded students:
-
-```text
-2502078@students.au.edu.pk / Student@123
-2502079@students.au.edu.pk / Student@123
-2502080@students.au.edu.pk / Student@123
-```
-
-### Admin Login
-
-```text
-Email: admin@aucs.local
-Password: Admin@12345
-```
-
-Second admin:
-
-```text
-Email: coordinator@aucs.local
-Password: Admin@12345
-```
-
-## Setup Requirements
-
-Install these before running the project:
-
-1. Visual Studio Code
-2. Node.js LTS
-3. Angular CLI
-4. .NET 8 SDK
-5. MongoDB Community Server or MongoDB Atlas
-
-## How to Run Locally
-
-### 1. Open the Project in VS Code
-
-Open VS Code, then open the extracted project folder.
-
-Or use terminal:
-
-```bash
-cd path/to/Pollpulse-final-submission
-code .
-```
-
-### 2. Start MongoDB
-
-If MongoDB is installed locally, make sure the MongoDB service is running.
-
-Default connection string used by backend:
-
-```text
-mongodb://127.0.0.1:27017/au_cs_voice_portal
-```
-
-The backend automatically creates seed data on first run.
-
-### 3. Run Backend
-
-Open a VS Code terminal:
-
-```bash
-cd backend
-dotnet restore
-dotnet run --launch-profile https
-```
-
-Backend URL:
-
-```text
-https://localhost:7235
-```
-
-If HTTPS certificate warning appears, run:
-
-```bash
-dotnet dev-certs https --trust
-```
-
-Then run backend again.
-
-### 4. Run Frontend
-
-Open a second VS Code terminal:
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-Frontend URL:
-
-```text
-http://localhost:4200
-```
-
-Open the frontend URL in your browser.
-
-## API Summary
-
-Detailed API documentation is available in:
-
-```text
-report/API_DOCUMENTATION.md
-```
-
-Main API groups:
-
-- `/api/auth` - student/admin login and student registration
-- `/api/elections` - student election dashboard, details, voting and results
-- `/api/feedbacks` - feedback masters, recent feedback and feedback submission
-- `/api/admin` - admin dashboard, elections, feedback, sentiment, audit logs and master data
-- `/api/admin/crud/teachers` - full CRUD controller
-- `/api/admin/crud/courses` - full CRUD controller
-- `/api/admin/crud/events` - full CRUD controller
-- `/api/admin/crud/classes` - full CRUD controller
-
-## Database
-
-Database schema and seed-data explanation are available in:
-
-```text
-database/MONGODB_SCHEMA.md
-database/mongodb-schema-diagram.mmd
-database/MONGODB_SETUP.md
-```
-
-## Project Report
-
-Project report is available in:
-
-```text
-report/Pollpulse_Project_Report.pdf
-report/Pollpulse_Project_Report.md
-```
-
-Before final submission, add real screenshots captured from your own running browser into:
-
-```text
-report/screenshots/
-```
-
-## Video Demo Link
-
-Replace this placeholder with your final Google Drive, YouTube, or LMS video link:
-
-```text
-Add final video demo link here
-```
-
-Video script is available in:
-
-```text
-demo/VIDEO_DEMO_SCRIPT.md
-```
-
-## Live Link
-
-Deployment is optional in the requirement. If deployed, add the deployed frontend/backend links here:
-
-```text
-Frontend live link: Add here
-Backend live link: Add here
-```
-
-## Requirement Coverage Checklist
-
-| Requirement | Status |
-|---|---|
-| Angular + TypeScript frontend | Done |
-| ASP.NET Core Web API backend | Done |
-| MongoDB database | Done |
-| Minimum 5-6 dynamic pages | Done |
-| Authentication login/signup | Done |
-| Dashboard with database data | Done |
-| Main feature page | Done |
-| Detail/profile dynamic route | Done |
-| Admin panel CRUD | Done |
-| Angular components/services/routing/directives | Done |
-| Reactive forms with validation | Done |
-| HTTP Client backend integration | Done |
-| Responsive CSS | Done |
-| 4 API controllers with full CRUD | Done |
-| JWT authentication | Done |
-| RESTful status codes | Done |
-| 5+ related collections | Done |
-| Seed data | Done |
-| Database schema diagram | Done |
-| Report PDF | Added |
-| Video demo | Record and add final link |
-| GitHub 10 commits/member commits | Must be done in GitHub |
-| Screenshots of all pages | Capture locally and add before final upload |
-
-## Image Assets
-
-The home feedback cards and feedback page hero sections use high-quality Unsplash images via `images.unsplash.com` URLs. These replace the earlier generated placeholder images and make the UI more professional for demo and viva. An internet connection is required for those remote images to load.
+│
+├── backend/
+│   ├── Controllers/
+│   │   ├── AdminController.cs
+│   │   ├── AuthController.cs
+│   │   ├── ElectionController.cs
+│   │   ├── FeedbackController.cs
+│   │   ├── PublicController.cs
+│   │   ├── AdminTeachersController.cs
+│   │   ├── AdminCoursesController.cs
+│   │   ├── AdminEventsController.cs
+│   │   └── AdminClassSectionsController.cs
+│   │
+│   ├── Models/
+│   │   ├── Admin.cs
+│   │   ├── AuditLog.cs
+│   │   ├── Candidate.cs
+│   │   ├── ClassSection.cs
+│   │   ├── Course.cs
+│   │   ├── Election.cs
+│   │   ├── Event.cs
+│   │   ├── Feedback.cs
+│   │   ├── Teacher.cs
+│   │   ├── User.cs
+│   │   └── Vote.cs
+│   │
+│   ├── Services/
+│   │   ├── MongoDBService.cs
+│   │   ├── SentimentService.cs
+│   │   └── TokenService.cs
+│   │
+│   ├── Program.cs
+│   ├── appsettings.json
+│   └── backend.csproj
+│
+├── frontend/
+│   ├── public/
+│   │   └── images/
+│   │       └── feedback/
+│   │
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── guards/
+│   │   │   │   ├── auth.guard.ts
+│   │   │   │   └── admin.guard.ts
+│   │   │   │
+│   │   │   ├── pages/
+│   │   │   ├── services/
+│   │   │   ├── app.routes.ts
+│   │   │   └── app.config.ts
+│   │   │
+│   │   ├── styles.css
+│   │   ├── main.css
+│   │   ├── dashboard.css
+│   │   ├── auth.css
+│   │   └── admin.css
+│   │
+│   ├── package.json
+│   └── angular.json
+│
+├── database/
+│   ├── MONGODB_SETUP.md
+│   ├── MONGODB_SCHEMA.md
+│   ├── SEED_DATA.md
+│   └── mongodb-schema-diagram.mmd
+│
+├── report/
+│   ├── API_DOCUMENTATION.md
+│   ├── Pollpulse_Project_Report.md
+│   └── Pollpulse_Project_Report.pdf
+│
+├── demo/
+│   ├── VIDEO_DEMO_SCRIPT.md
+│   └── VIDEO_LINK.txt
+│
+├── run_backend.bat
+├── run_frontend.bat
