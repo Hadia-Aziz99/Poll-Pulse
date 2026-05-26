@@ -1,0 +1,56 @@
+.admin-body { background: #0f172a; color: var(--ink); }
+.admin-topbar { min-height: 74px; display: flex; align-items: center; background: rgba(15, 23, 42, .92); border-bottom: 1px solid rgba(255,255,255,.1); position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); }
+.admin-brand { color: #fff; font-weight: 900; text-decoration: none; }
+.admin-layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 74px); }
+.admin-sidebar { background: linear-gradient(180deg, #111827, #0f172a); padding: 28px 18px; border-right: 1px solid rgba(255,255,255,.10); }
+.sidebar-title { color: rgba(255,255,255,.55); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 900; margin-bottom: 18px; }
+.admin-sidebar a { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 16px; color: rgba(255,255,255,.78); text-decoration: none; font-weight: 800; margin-bottom: 8px; transition: .2s ease; }
+.admin-sidebar a:hover { background: rgba(255,255,255,.10); color: #fff; transform: translateX(3px); }
+.admin-main { padding: 34px; background: var(--bg); min-width: 0; }
+.admin-footer { background: #0f172a; color: rgba(255,255,255,.62); border-top: 1px solid rgba(255,255,255,.08); }
+.admin-card { color: var(--ink); }
+@media (max-width: 991px) { .admin-layout { grid-template-columns: 1fr; } .admin-sidebar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; } .admin-sidebar a { margin-bottom: 0; } }
+
+
+/* Final admin button layout correction */
+.admin-main .btn,
+.admin-topbar .btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .45rem;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+.admin-main .btn-brand {
+  min-height: 42px !important;
+  height: auto !important;
+  width: auto !important;
+  padding: .65rem 1.25rem !important;
+  border-radius: 999px !important;
+  overflow: visible !important;
+}
+.admin-main .btn-brand.btn-lg,
+.admin-main .btn-lg.btn-brand {
+  min-height: 50px !important;
+  padding: .8rem 1.55rem !important;
+  font-size: 1rem !important;
+}
+.admin-main .d-flex .btn-brand,
+.admin-main .admin-card .btn-brand {
+  flex: 0 0 auto !important;
+}
+.admin-card,
+.admin-main {
+  overflow: visible !important;
+}
+@media (max-width: 575px) {
+  .admin-main .d-flex.justify-content-between {
+    align-items: flex-start !important;
+  }
+  .admin-main .btn-brand {
+    width: 100% !important;
+  }
+}

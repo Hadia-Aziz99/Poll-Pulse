@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+  <div>
+    <span class="hero-kicker">Admin Intelligence</span>
+    <h1 class="fw-black">Sentiment & Opinion Analysis</h1>
+  </div>
+  <button class="btn btn-brand btn-sm" (click)="loadSentimentMetrics()"><i class="fa-solid fa-arrows-rotate me-2"></i>Recalculate</button>
+</div>
+
+<div *ngIf="isLoading()" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading()">
+  <!-- Overall Department Sentiment -->
+  <div class="admin-card p-4 mb-4">
+    <h4 class="fw-bold mb-3"><i class="fa-solid fa-brain me-2 text-primary"></i>Overall Student Sentiment</h4>
+    <p class="text-muted small">Aggregated polarity count of all comments and suggestions submitted by students.</p>
+    
+    <div class="row g-4 align-items-center">
+      <div class="col-md-5">
+        <div class="sentiment-bar my-3" style="height: 32px; border-radius: 16px; overflow: hidden;">
+          <div class="positive" [ngStyle]="{'width': sentimentData().summary.positive + '%'}"></div>
+          <div class="neutral" [ngStyle]="{'width': sentimentData().summary.neutral + '%'}"></div>
+          <div class="negative" [ngStyle]="{'width': sentimentData().summary.negative + '%'}"></div>
+        </div>
+        <div class="d-flex justify-content-between small text-muted">
+          <span>Positive: <strong>{{ sentimentData().summary.positive }}%</strong></span>
+          <span>Neutral: <strong>{{ sentimentData().summary.neutral }}%</strong></span>
+          <span>Negative: <strong>{{ sentimentData().summary.negative }}%</strong></span>
+        </div>
+      </div>
+      
+      <div class="col-md-7">
+        <div class="row g-2">
+          <div class="col-4">
+            <div class="border rounded-4 p-3 text-center bg-light">
+              <span class="text-success fw-black fs-4 d-block">{{ sentimentData().summary.positive }}%</span>
+              <small class="text-muted">Positive</small>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="border rounded-4 p-3 text-center bg-light">
+              <span class="text-warning fw-black fs-4 d-block">{{ sentimentData().summary.neutral }}%</span>
+              <small class="text-muted">Neutral</small>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="border rounded-4 p-3 text-center bg-light">
+              <span class="text-danger fw-black fs-4 d-block">{{ sentimentData().summary.negative }}%</span>
+              <small class="text-muted">Negative</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Sentiment by Category -->
+    <div class="col-lg-6">
+      <div class="admin-card p-4 h-100">
+        <h4 class="fw-bold mb-3"><i class="fa-solid fa-chart-bar me-2 text-primary"></i>Breakdown by Campus Domain</h4>
+        <div *ngIf="sentimentData().byCategory.length === 0" class="empty-state">No feedback logs found yet.</div>
+        
+        <div *ngFor="let cat of sentimentData().byCategory" class="border-bottom py-3">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <strong>{{ getCategoryLabel(cat.category) }}</strong>
+            <span class="small text-muted">{{ cat.count }} records • <i class="fa-solid fa-star text-warning me-1"></i>{{ cat.avgRating }}/5</span>
+          </div>
+          
+          <div class="sentiment-bar" style="height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 4px;">
+            <div class="positive" [ngStyle]="{'width': cat.sentiment.positive + '%'}"></div>
+            <div class="neutral" [ngStyle]="{'width': cat.sentiment.neutral + '%'}"></div>
+            <div class="negative" [ngStyle]="{'width': cat.sentiment.negative + '%'}"></div>
+          </div>
+          
+          <div class="d-flex justify-content-between small text-muted" style="font-size: 0.75rem;">
+            <span class="text-success">Pos: {{ cat.sentiment.positive }}%</span>
+            <span class="text-warning">Neu: {{ cat.sentiment.neutral }}%</span>
+            <span class="text-danger">Neg: {{ cat.sentiment.negative }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sentiment by Class -->
+    <div class="col-lg-6">
+      <div class="admin-card p-4 h-100">
+        <h4 class="fw-bold mb-3"><i class="fa-solid fa-users me-2 text-primary"></i>Opinion by Class Section</h4>
+        <div *ngIf="sentimentData().byClass.length === 0" class="empty-state">No class feedback found yet.</div>
+        
+        <div *ngFor="let cls of sentimentData().byClass" class="border-bottom py-3">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="badge bg-secondary">{{ cls.classKey }}</span>
+            <span class="small text-muted">{{ cls.count }} feedback submissions</span>
+          </div>
+          
+          <div class="sentiment-bar" style="height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 4px;">
+            <div class="positive" [ngStyle]="{'width': cls.sentiment.positive + '%'}"></div>
+            <div class="neutral" [ngStyle]="{'width': cls.sentiment.neutral + '%'}"></div>
+            <div class="negative" [ngStyle]="{'width': cls.sentiment.negative + '%'}"></div>
+          </div>
+          
+          <div class="d-flex justify-content-between small text-muted" style="font-size: 0.75rem;">
+            <span class="text-success">Pos: {{ cls.sentiment.positive }}%</span>
+            <span class="text-warning">Neu: {{ cls.sentiment.neutral }}%</span>
+            <span class="text-danger">Neg: {{ cls.sentiment.negative }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

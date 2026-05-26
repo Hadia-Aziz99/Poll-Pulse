@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+  <div>
+    <h1 class="fw-black">Manage Elections</h1>
+    <p class="text-muted">Close polling to display final result to students.</p>
+  </div>
+  <a routerLink="/admin/elections/create" class="btn btn-brand">Create Election</a>
+</div>
+
+<div *ngIf="errorMessage()" class="alert alert-danger rounded-4">
+  {{ errorMessage() }}
+</div>
+<div *ngIf="successMessage()" class="alert alert-success rounded-4">
+  {{ successMessage() }}
+</div>
+
+<div *ngIf="isLoading()" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading()" class="admin-card p-4 table-responsive">
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th>Election</th>
+        <th>Class</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Candidates</th>
+        <th>Votes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let election of elections()">
+        <td><strong>{{ election.title }}</strong></td>
+        <td>{{ election.classKey }}</td>
+        <td>{{ election.electionType }}</td>
+        <td><span class="status-badge" [class]="election.status">{{ election.status }}</span></td>
+        <td>{{ election.candidatesCount }}</td>
+        <td>{{ election.votesCount }}</td>
+        <td>
+          <div class="d-flex flex-wrap gap-2">
+            <a [routerLink]="['/admin/elections', election.id, 'results']" class="btn btn-sm btn-outline-primary">Result</a>
+            <button class="btn btn-sm btn-success" (click)="changeStatus(election.id, 'active')">Open</button>
+            <button class="btn btn-sm btn-warning" (click)="changeStatus(election.id, 'closed')">Close</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteElection(election.id)">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="elections().length === 0">
+        <td colspan="7" class="text-center py-4 text-muted">No elections found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

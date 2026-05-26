@@ -1,0 +1,56 @@
+<section class="container py-5">
+  <div *ngIf="isLoading()" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading() && errorMessage()" class="alert alert-danger rounded-4">
+    {{ errorMessage() }}
+  </div>
+
+  <div *ngIf="!isLoading() && resultsData()" class="glass-card p-4 p-md-5">
+    <div class="d-flex flex-wrap justify-content-between gap-3 align-items-start mb-4">
+      <div>
+        <span class="category-pill">{{ resultsData().election.electionType }} • Class Section</span>
+        <h1 class="fw-black mt-2">{{ resultsData().election.title }}</h1>
+        <p class="text-muted mb-0">Total votes: <strong>{{ resultsData().totalVotes }}</strong></p>
+      </div>
+      <span class="status-badge" [class]="resultsData().election.status">{{ resultsData().election.status }}</span>
+    </div>
+
+    <div *ngIf="resultsData().election.status !== 'closed'">
+      <div class="alert alert-warning">Final result will be shown after the admin closes polling. Your vote is saved if you have already voted.</div>
+    </div>
+
+    <div *ngIf="resultsData().election.status === 'closed'">
+      <div *ngIf="resultsData().winner" class="winner-box mb-4">
+        <i class="fa-solid fa-trophy me-2"></i>Final Winner: <strong>{{ resultsData().winner.name }}</strong> (Roll No: {{ resultsData().winner.rollNo }}) with {{ resultsData().totalVotes }} total votes.
+      </div>
+      
+      <div *ngFor="let row of resultsData().results" class="result-row mb-3">
+        <div class="d-flex justify-content-between">
+          <strong>{{ row.name }}</strong>
+          <span>{{ row.votes }} votes • {{ row.percentage }}%</span>
+        </div>
+        <div class="progress mt-2">
+          <div class="progress-bar" [ngStyle]="{'width': row.percentage + '%'}"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+    <h4 class="fw-bold">Class Feedback Sentiment Summary</h4>
+    <p class="text-muted small">This shows sentiment percentage for feedback submitted by students of this class section.</p>
+    <div class="sentiment-bar">
+      <div class="positive" [ngStyle]="{'width': resultsData().sentiment.positive + '%'}"></div>
+      <div class="neutral" [ngStyle]="{'width': resultsData().sentiment.neutral + '%'}"></div>
+      <div class="negative" [ngStyle]="{'width': resultsData().sentiment.negative + '%'}"></div>
+    </div>
+    <div class="row g-3 mt-3">
+      <div class="col-md-4"><div class="mini-stat"><span>{{ resultsData().sentiment.positive }}%</span><small>Positive</small></div></div>
+      <div class="col-md-4"><div class="mini-stat"><span>{{ resultsData().sentiment.neutral }}%</span><small>Neutral</small></div></div>
+      <div class="col-md-4"><div class="mini-stat"><span>{{ resultsData().sentiment.negative }}%</span><small>Negative</small></div></div>
+    </div>
+  </div>
+</section>

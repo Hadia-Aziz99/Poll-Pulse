@@ -1,0 +1,59 @@
+<section class="auth-shell">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="auth-frame p-4 p-md-5">
+          <h1 class="fw-black">Student Registration</h1>
+          <p class="text-muted">Only Air University student emails are accepted. Roll number is automatically extracted from email.</p>
+          
+          <div *ngIf="errorMessage()" class="alert alert-danger rounded-4">
+            {{ errorMessage() }}
+          </div>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Full Name</label>
+              <input formControlName="name" class="form-control form-control-lg" placeholder="Enter full name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">University Email</label>
+              <input formControlName="email" type="email" class="form-control form-control-lg" placeholder="2502077@students.au.edu.pk">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Degree</label>
+              <select formControlName="degree" class="form-select form-select-lg">
+                <option value="">Select</option>
+                <option value="BSCS">BSCS</option>
+                <option value="BSIT">BSIT</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Year/Class</label>
+              <select formControlName="year" class="form-select form-select-lg">
+                <option [value]="null">Select</option>
+                <option *ngFor="let y of yearsList" [value]="y">Year {{ y }}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Section</label>
+              <select formControlName="section" class="form-select form-select-lg">
+                <option value="">Select</option>
+                <option *ngFor="let sec of sectionsList" [value]="sec">Section {{ sec }}</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Password</label>
+              <input formControlName="password" type="password" class="form-control form-control-lg" placeholder="Create password">
+            </div>
+            <div class="col-12">
+              <button type="submit" [disabled]="registerForm.invalid || isLoading()" class="btn btn-brand btn-lg w-100">
+                {{ isLoading() ? 'Creating Account...' : 'Create Student Account' }}
+              </button>
+            </div>
+          </form>
+          <p class="mt-4 mb-0 small text-muted">Already registered? <a class="fw-bold" routerLink="/login">Log in here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

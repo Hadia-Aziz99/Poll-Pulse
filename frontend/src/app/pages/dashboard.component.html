@@ -1,0 +1,63 @@
+<section class="container py-5">
+  <div *ngIf="isLoading()" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading()">
+    <div class="welcome-card dashboard-welcome-card mb-4 reveal-up">
+      <div class="dashboard-welcome-copy">
+        <span class="hero-kicker">Student Dashboard</span>
+        <h1 class="fw-black mb-1">Welcome, {{ authService.currentUser()?.name }}</h1>
+        <p class="mb-0 text-muted">{{ authService.currentUser()?.degree }} • Year {{ authService.currentUser()?.year }} • Section {{ authService.currentUser()?.section }} • Roll No. {{ authService.currentUser()?.rollNo }}</p>
+      </div>
+      <div class="dashboard-welcome-actions">
+        <a routerLink="/feedback/teacher" class="btn btn-brand"><i class="fa-solid fa-comments me-2"></i>Submit Feedback</a>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4"><div class="metric-card"><span>{{ dashboardData().openElections.length }}</span><small>Active Elections</small></div></div>
+      <div class="col-md-4"><div class="metric-card"><span>{{ dashboardData().closedElections.length }}</span><small>Recent Closed Elections</small></div></div>
+      <div class="col-md-4"><div class="metric-card"><span>{{ dashboardData().metrics.feedbacksSubmitted }}</span><small>Your Feedback Submissions</small></div></div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="glass-card p-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">Active CR/GR Elections</h4>
+            <a routerLink="/elections" class="btn btn-sm btn-outline-primary">View All</a>
+          </div>
+          <div *ngIf="dashboardData().openElections.length === 0" class="empty-state">No active election for your class right now.</div>
+          <div *ngFor="let election of dashboardData().openElections" class="list-card mb-3">
+            <div>
+              <span class="status-badge active">{{ election.electionType }}</span>
+              <h5 class="mt-2 mb-1">{{ election.title }}</h5>
+              <p class="small text-muted mb-0">Ends at: {{ election.endAt | date:'medium' }}</p>
+            </div>
+            <div>
+              <a *ngIf="election.hasVoted" [routerLink]="['/elections', election.id, 'results']" class="btn btn-outline-primary btn-sm">Result</a>
+              <a *ngIf="!election.hasVoted" [routerLink]="['/elections', election.id]" class="btn btn-brand btn-sm">Vote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="glass-card p-4 h-100">
+          <h4 class="fw-bold mb-3">Recent Class Feedback Activity</h4>
+          <div *ngIf="dashboardData().recentFeedbacks.length === 0" class="empty-state">No feedback submitted in your class yet.</div>
+          <div *ngFor="let item of dashboardData().recentFeedbacks" class="mini-row">
+            <div>
+              <strong>{{ item.category | uppercase }}</strong>
+              <br>
+              <span class="small text-muted">{{ item.comment }}</span>
+            </div>
+            <span class="sentiment-pill" [class]="item.sentiment.toLowerCase()">{{ item.sentiment }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

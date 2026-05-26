@@ -1,0 +1,36 @@
+<section class="container py-5">
+  <div class="page-banner page-banner-visual election-page-hero mb-4 reveal-up">
+    <div class="page-banner-copy academic-hero-content compact">
+      <span class="hero-kicker"><i class="fa-solid fa-square-poll-vertical me-2"></i>Class Elections</span>
+      <h1 class="fw-black mb-2 mt-3">CR/GR Elections</h1>
+      <p class="mb-0">Only elections for your class are shown: <strong>{{ authService.currentUser()?.classKey }}</strong>.</p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading()" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading()" class="row g-4">
+    <div *ngIf="elections().length === 0" class="col-12">
+      <div class="empty-state">No election found for your class section.</div>
+    </div>
+    <div *ngFor="let election of elections()" class="col-md-6 col-xl-4">
+      <div class="poll-card h-100">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="category-pill"><i class="fa-solid fa-user-tie"></i>{{ election.electionType }} Election</span>
+          <span class="status-badge" [class]="election.status">{{ election.status }}</span>
+        </div>
+        <h5>{{ election.title }}</h5>
+        <p class="text-muted small">{{ election.description || 'Vote for your class representative.' }}</p>
+        <p class="small text-muted"><i class="fa-solid fa-users me-1"></i>{{ election.classKey }}</p>
+        <div class="d-grid gap-2">
+          <a *ngIf="election.status === 'active' && !election.hasVoted" class="btn btn-brand" [routerLink]="['/elections', election.id]">Vote Now</a>
+          <a *ngIf="election.status === 'closed' || election.hasVoted" class="btn btn-outline-primary" [routerLink]="['/elections', election.id, 'results']">Final Result</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

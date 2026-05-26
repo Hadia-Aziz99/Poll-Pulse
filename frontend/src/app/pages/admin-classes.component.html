@@ -1,0 +1,17 @@
+<h1 class="fw-black">CS Department Classes</h1>
+<p class="text-muted">The system supports 36 class sections: BSCS and BSIT, Year 1 to Year 6, Sections A/B/C.</p>
+
+<div *ngIf="isLoading()" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading()" class="row g-3">
+  <div *ngFor="let cls of classes()" class="col-md-4 col-xl-3">
+    <div class="class-card">
+      <strong>{{ cls.title }}</strong>
+      <small>{{ cls.classKey }}</small>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,169 @@
+<!-- PUBLIC WRAPPER -->
+<ng-container *ngIf="!isAdminMode()">
+  <nav class="navbar navbar-expand-lg app-navbar sticky-top">
+    <div class="container-fluid px-xl-5">
+      <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/">
+        <span class="brand-mark">P</span>
+        <span class="brand-copy"><strong>PollPulse</strong><small>Student Voice Portal</small></span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" routerLink="/"><i class="fa-solid fa-house me-1"></i>Home</a></li>
+          <li class="nav-item" *ngIf="authService.currentUser() && authService.currentUser()?.role === 'user'"><a class="nav-link" routerLink="/dashboard"><i class="fa-solid fa-chart-line me-1"></i>Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/elections"><i class="fa-solid fa-square-poll-vertical me-1"></i>CR/GR Polls</a></li>
+
+          <li class="nav-item dropdown feedback-nav">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-message me-1"></i>Feedback
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end feedback-menu shadow-lg">
+              <li><h6 class="dropdown-header">Feedback Pages</h6></li>
+              <li><a class="dropdown-item" routerLink="/feedback/faculty"><i class="fa-solid fa-building-columns"></i> Faculty Feedback</a></li>
+              <li><a class="dropdown-item" routerLink="/feedback/teacher"><i class="fa-solid fa-chalkboard-user"></i> Teacher Feedback</a></li>
+              <li><a class="dropdown-item" routerLink="/feedback/course"><i class="fa-solid fa-book-open-reader"></i> Course Feedback</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="/feedback/transport"><i class="fa-solid fa-bus"></i> Transport</a></li>
+              <li><a class="dropdown-item" routerLink="/feedback/cafeteria"><i class="fa-solid fa-utensils"></i> Cafeteria Food</a></li>
+              <li><a class="dropdown-item" routerLink="/feedback/sports"><i class="fa-solid fa-futbol"></i> Sports Facilities</a></li>
+              <li><a class="dropdown-item" routerLink="/feedback/library"><i class="fa-solid fa-book"></i> Library</a></li>
+              <li><a class="dropdown-item" routerLink="/feedback/event"><i class="fa-solid fa-calendar-check"></i> Events</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/contact">Contact</a></li>
+          <li class="nav-item"><span class="nav-chip"><i class="fa-regular fa-clock me-1"></i><span>{{ liveTime() }}</span></span></li>
+          <li class="nav-item"><span class="nav-chip weather-chip"><i class="fa-solid fa-cloud-sun me-1"></i><span>{{ weatherText() }}</span></span></li>
+          <li class="nav-item"><button class="btn btn-sm theme-toggle" type="button" (click)="toggleTheme()"><i class="fa-solid me-1" [ngClass]="currentTheme() === 'dark' ? 'fa-sun' : 'fa-moon'"></i><span>{{ currentTheme() === 'dark' ? 'Light' : 'Dark' }}</span></button></li>
+          
+          <li class="nav-item" *ngIf="!authService.isLoggedIn()"><a class="btn btn-outline-dark btn-sm px-3 nav-action" routerLink="/login">Student Login</a></li>
+          <li class="nav-item" *ngIf="!authService.isLoggedIn()"><a class="btn btn-brand btn-sm px-3" routerLink="/register">Register</a></li>
+          
+          <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
+            <a class="nav-link dropdown-toggle user-nav" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="fa-regular fa-user me-1"></i>{{ authService.currentUser()?.name }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg">
+              <li><span class="dropdown-item-text small text-muted">{{ authService.currentUser()?.role === 'admin' ? 'ADMIN PORTAL' : authService.currentUser()?.classKey }}</span></li>
+              <li *ngIf="authService.isAdmin()"><a class="dropdown-item" routerLink="/admin/dashboard"><i class="fa-solid fa-gauge-high me-2"></i>Admin Portal</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <div class="px-3 py-1">
+                  <button class="btn btn-sm btn-outline-danger w-100" (click)="logout()">Logout</button>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+
+  <footer class="footer-section mt-5">
+    <div class="container py-5">
+      <div class="footer-shell">
+        <div class="row g-4 align-items-start">
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="footer-brand d-flex align-items-center mb-3">
+              <span class="brand-mark footer-mark">P</span>
+              <div>
+                <h5 class="mb-0 fw-black">PollPulse</h5>
+                <p class="mb-0 text-muted small">Student polling, feedback and sentiment analysis portal.</p>
+              </div>
+            </div>
+            <p class="text-muted small mb-3">Designed for Air University CS students to participate in CR/GR selection, submit feedback and view final results once polls are closed.</p>
+            <div class="footer-socials" aria-label="Project social links">
+              <a routerLink="/contact" aria-label="Contact PollPulse"><i class="fa-solid fa-envelope"></i></a>
+              <a routerLink="/about" aria-label="About PollPulse"><i class="fa-solid fa-circle-info"></i></a>
+              <a routerLink="/elections" aria-label="PollPulse Elections"><i class="fa-solid fa-square-poll-vertical"></i></a>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-lg-2 col-md-6">
+            <h6 class="footer-heading">Site Map</h6>
+            <ul class="footer-link-list mb-0">
+              <li><a routerLink="/">Home</a></li>
+              <li><a routerLink="/elections">CR/GR Polls</a></li>
+              <li><a routerLink="/feedback/teacher">Teacher Feedback</a></li>
+              <li><a routerLink="/feedback/course">Course Feedback</a></li>
+              <li><a routerLink="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xl-2 col-lg-2 col-md-6">
+            <h6 class="footer-heading">Account</h6>
+            <ul class="footer-link-list mb-0">
+              <li><a routerLink="/login">Student Login</a></li>
+              <li><a routerLink="/register">Create Account</a></li>
+              <li><a routerLink="/about">How It Works</a></li>
+              <li><a routerLink="/feedback/faculty">Faculty Feedback</a></li>
+              <li><a routerLink="/feedback/event">Event Feedback</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <h6 class="footer-heading">Project Team</h6>
+            <ul class="footer-list mb-3">
+              <li>Muhammad Taha Tariq</li>
+              <li>Huda Tariq</li>
+              <li>Hadia Aziz</li>
+            </ul>
+            <div class="footer-note-pill"><i class="fa-solid fa-shield-heart me-2"></i>Built for secure student participation and transparent campus feedback.</div>
+          </div>
+        </div>
+
+        <div class="footer-bottom mt-4 pt-3">
+          <p class="small text-muted mb-0">© 2026 PollPulse. All rights reserved. Developed as a university web technology project.</p>
+          <div class="footer-bottom-links">
+            <a routerLink="/about">Privacy Note</a>
+            <a routerLink="/contact">Support</a>
+            <a routerLink="/about">Academic Use</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</ng-container>
+
+<!-- ADMIN WRAPPER -->
+<ng-container *ngIf="isAdminMode()">
+  <nav class="admin-topbar">
+    <div class="container-fluid px-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <a class="admin-brand d-flex align-items-center" routerLink="/admin/dashboard"><span class="brand-mark">AU</span> CS Admin Portal</a>
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span class="nav-chip text-white"><i class="fa-regular fa-clock me-1"></i><span>{{ liveTime() }}</span></span>
+        <span class="nav-chip text-white"><i class="fa-solid fa-cloud-sun me-1"></i><span>{{ weatherText() }}</span></span>
+        <button class="btn btn-sm btn-light theme-toggle" type="button" (click)="toggleTheme()"><i class="fa-solid fa-circle-half-stroke me-1"></i>Theme</button>
+        <button class="btn btn-sm btn-outline-light" (click)="adminLogout()"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i>Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-title">Control Center</div>
+      <a routerLink="/admin/dashboard" routerLinkActive="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+      <a routerLink="/admin/classes" routerLinkActive="active"><i class="fa-solid fa-users-rectangle"></i> 36 Classes</a>
+      <a routerLink="/admin/elections/create" routerLinkActive="active"><i class="fa-solid fa-plus"></i> Create CR/GR Election</a>
+      <a routerLink="/admin/elections" routerLinkActive="active"><i class="fa-solid fa-square-poll-vertical"></i> Manage Elections</a>
+      <a routerLink="/admin/feedback" routerLinkActive="active"><i class="fa-solid fa-comments"></i> Feedback Records</a>
+      <a routerLink="/admin/sentiment" routerLinkActive="active"><i class="fa-solid fa-face-smile"></i> Sentiment Analysis</a>
+      <a routerLink="/admin/masters" routerLinkActive="active"><i class="fa-solid fa-database"></i> Teachers/Courses/Events</a>
+      <a routerLink="/admin/audit-logs" routerLinkActive="active"><i class="fa-solid fa-shield-halved"></i> Audit Logs</a>
+      <a routerLink="/"><i class="fa-solid fa-house"></i> Public Site</a>
+    </aside>
+    <main class="admin-main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</ng-container>
+
+<!-- Scroll Top Button -->
+<button class="scroll-top-btn" [class.is-visible]="showScrollTop()" type="button" (click)="scrollToTop()" aria-label="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>

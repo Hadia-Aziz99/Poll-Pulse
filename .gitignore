@@ -1,0 +1,21 @@
+# Node / Angular
+node_modules/
+.angular/
+dist/
+npm-debug.log*
+
+# .NET build output
+bin/
+obj/
+*.user
+*.suo
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+*.Development.local.json

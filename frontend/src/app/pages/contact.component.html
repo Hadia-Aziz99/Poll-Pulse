@@ -1,0 +1,60 @@
+<section class="container-fluid px-xl-5 py-5">
+  <div class="academic-page-hero contact-page-hero reveal-up">
+    <div class="academic-hero-content compact">
+      <span class="hero-kicker"><i class="fa-solid fa-envelope me-2"></i>Contact PollPulse</span>
+      <h1 class="fw-black display-5 mb-3">Share a question, suggestion or issue with the project team.</h1>
+      <p class="lead mb-0">Use this page for portal feedback, demo questions or improvement ideas related to the student voice system.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container pb-5">
+  <div class="row justify-content-center">
+    <div class="col-xl-9 col-lg-10">
+      <div class="glass-card contact-form-card p-4 p-lg-5 reveal-up">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-4">
+            <span class="eyebrow">Student Support</span>
+            <h2 class="fw-black mt-2 mb-3">We value clear feedback.</h2>
+            <p class="text-muted mb-0">For demo purposes, this page records a basic contact message acknowledgement.</p>
+          </div>
+          <div class="col-lg-8">
+            <div *ngIf="submitted()" class="alert alert-success rounded-4 mb-3">
+              Thank you. Your message has been noted.
+            </div>
+            <form [formGroup]="contactForm" (ngSubmit)="submit()" class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input formControlName="name" class="form-control">
+                  <div *ngIf="contactForm.controls.name.invalid && contactForm.controls.name.touched" class="form-text text-danger">Name is required.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input formControlName="email" type="email" class="form-control">
+                  <div *ngIf="contactForm.controls.email.invalid && contactForm.controls.email.touched" class="form-text text-danger">Valid email is required.</div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Rating</label>
+                <select formControlName="rating" class="form-select">
+                  <option [value]="5">5</option>
+                  <option [value]="4">4</option>
+                  <option [value]="3">3</option>
+                  <option [value]="2">2</option>
+                  <option [value]="1">1</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea formControlName="message" rows="4" class="form-control"></textarea>
+                  <div *ngIf="contactForm.controls.message.invalid && contactForm.controls.message.touched" class="form-text text-danger">Message must be at least 5 characters.</div>
+              </div>
+              <div class="col-12">
+                <button type="submit" [disabled]="contactForm.invalid" class="btn btn-brand px-4">Submit Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

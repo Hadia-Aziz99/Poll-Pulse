@@ -1,0 +1,83 @@
+<div class="admin-card p-4 p-md-5">
+  <h1 class="fw-black">Create CR/GR Election</h1>
+  <p class="text-muted">Create one election for a specific BSCS/BSIT class section. Add at least two candidates.</p>
+
+  <div *ngIf="errorMessage()" class="alert alert-danger rounded-4">
+    {{ errorMessage() }}
+  </div>
+  <div *ngIf="successMessage()" class="alert alert-success rounded-4">
+    {{ successMessage() }}
+  </div>
+
+  <form [formGroup]="electionForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-8">
+      <label class="form-label">Title</label>
+      <input formControlName="title" class="form-control form-control-lg" placeholder="BSCS Year 2 Section A CR Election">
+      <div *ngIf="electionForm.controls.title.invalid && electionForm.controls.title.touched" class="form-text text-danger">Title must be 5 to 180 characters.</div>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Type</label>
+      <select formControlName="electionType" class="form-select form-select-lg">
+        <option value="CR">CR</option>
+        <option value="GR">GR</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Degree</label>
+      <select formControlName="degree" class="form-select">
+        <option value="BSCS">BSCS</option>
+        <option value="BSIT">BSIT</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Year/Class</label>
+      <select formControlName="year" class="form-select">
+        <option *ngFor="let y of yearsList" [value]="y">Year {{ y }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Section</label>
+      <select formControlName="section" class="form-select">
+        <option *ngFor="let sec of sectionsList" [value]="sec">{{ sec }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Status</label>
+      <select formControlName="status" class="form-select">
+        <option *ngFor="let s of statusList" [value]="s">{{ s | titlecase }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Start At</label>
+      <input formControlName="startAt" type="datetime-local" class="form-control">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">End At</label>
+      <input formControlName="endAt" type="datetime-local" class="form-control">
+    </div>
+    <div class="col-12">
+      <label class="form-label">Description</label>
+      <textarea formControlName="description" rows="3" class="form-control" placeholder="Write description..."></textarea>
+    </div>
+    
+    <div class="col-12">
+      <h5 class="fw-bold mt-3">Candidates</h5>
+    </div>
+    <div formArrayName="candidates">
+      <div *ngFor="let candidate of candidates.controls; let i = index" [formGroupName]="i" class="row g-2 mb-2 align-items-center">
+      <div class="col-md-7">
+        <input formControlName="name" class="form-control" [placeholder]="'Candidate ' + (i+1) + ' name'">
+      </div>
+      <div class="col-md-5">
+        <input formControlName="rollNo" class="form-control" placeholder="Roll No">
+      </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-4">
+      <button type="submit" [disabled]="electionForm.invalid || isSubmitting()" class="btn btn-brand btn-lg">
+        {{ isSubmitting() ? 'Creating...' : 'Create Election' }}
+      </button>
+    </div>
+  </form>
+</div>

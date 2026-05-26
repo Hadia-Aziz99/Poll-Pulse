@@ -1,0 +1,226 @@
+<section class="feedback-page-shell">
+  <div class="container-fluid px-xl-5 py-5">
+    
+    <!-- Hero Block -->
+    <div class="feedback-hero academic-feedback-hero mb-4 reveal-up" [ngClass]="'feedback-bg-' + category">
+      <div class="feedback-hero-icon"><i class="fa-solid" [ngClass]="categoryMeta[category].icon"></i></div>
+      <div>
+        <span class="eyebrow">Dedicated Feedback Page</span>
+        <h1 class="fw-black mb-2">{{ categoryMeta[category].label }}</h1>
+        <p class="mb-0">{{ categoryMeta[category].description }}</p>
+      </div>
+      <div class="feedback-hero-side">
+        <span class="sentiment-pill neutral"><i class="fa-solid fa-brain me-1"></i>Sentiment Enabled</span>
+      </div>
+    </div>
+
+    <!-- Category Switches -->
+    <div class="category-switcher mb-4 reveal-up delay-1">
+      <a *ngFor="let key of keys" [routerLink]="['/feedback', key]" class="category-switch" [class.active]="category === key">
+        <i class="fa-solid" [ngClass]="categoryMeta[key].icon"></i>
+        <span>{{ categoryLabels[key].replace(' Feedback', '') }}</span>
+      </a>
+    </div>
+
+    <div *ngIf="isLoading()" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading()" class="row g-4">
+      <div class="col-xl-8 col-lg-8">
+        <div class="feedback-form-card reveal-up delay-1">
+          
+          <div *ngIf="errorMessage()" class="alert alert-danger rounded-4">
+            <i class="fa-solid fa-circle-exclamation me-2"></i>{{ errorMessage() }}
+          </div>
+          <div *ngIf="successMessage()" class="alert alert-success rounded-4">
+            <i class="fa-solid fa-circle-check me-2"></i>{{ successMessage() }}
+          </div>
+
+          <div class="form-section-title mb-4">
+            <div>
+              <span class="eyebrow">Step 01</span>
+              <h4 class="mb-1">Rate and write your honest feedback</h4>
+              <p class="text-muted mb-0">{{ categoryMeta[category].helper }}</p>
+            </div>
+          </div>
+
+          <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="row g-4">
+            
+            <!-- Category Target Selection -->
+            <ng-container [ngSwitch]="category">
+              
+              <!-- Teacher -->
+              <ng-container *ngSwitchCase="'teacher'">
+                <div class="col-md-7 target-block">
+                  <label class="form-label">Select Teacher</label>
+                  <select formControlName="teacher" class="form-select form-select-lg">
+                    <option value="">Choose teacher</option>
+                    <option *ngFor="let t of teachers()" [value]="t.id">{{ t.name }}</option>
+                  </select>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label">Specific Area</label>
+                  <input formControlName="targetName" class="form-control form-control-lg" placeholder="Optional, e.g. Lab lecture">
+                </div>
+              </ng-container>
+
+              <!-- Course -->
+              <ng-container *ngSwitchCase="'course'">
+                <div class="col-md-7 target-block">
+                  <label class="form-label">Select Course</label>
+                  <select formControlName="course" class="form-select form-select-lg">
+                    <option value="">Choose course</option>
+                    <option *ngFor="let c of courses()" [value]="c.id">{{ c.code }} - {{ c.title }}</option>
+                  </select>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label">Specific Topic</label>
+                  <input formControlName="targetName" class="form-control form-control-lg" placeholder="Optional, e.g. OOP Lab">
+                </div>
+              </ng-container>
+
+              <!-- Event -->
+              <ng-container *ngSwitchCase="'event'">
+                <div class="col-md-7 target-block">
+                  <label class="form-label">Select Event</label>
+                  <select formControlName="event" class="form-select form-select-lg">
+                    <option value="">Choose event</option>
+                    <option *ngFor="let e of events()" [value]="e.id">{{ e.name }}</option>
+                  </select>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label">Specific Activity</label>
+                  <input formControlName="targetName" class="form-control form-control-lg" placeholder="Optional, e.g. Registration desk">
+                </div>
+              </ng-container>
+
+              <!-- Generic categories -->
+              <ng-container *ngSwitchDefault>
+                <div class="col-12 target-block">
+                  <label class="form-label">Target / Area Name</label>
+                  <input formControlName="targetName" class="form-control form-control-lg" placeholder="Example: CS Office, Route 05, Cafeteria, Main Library, Football Ground">
+                  <div *ngIf="feedbackForm.controls.targetName.invalid && feedbackForm.controls.targetName.touched" class="form-text text-danger">Target / area is required.</div>
+                </div>
+              </ng-container>
+
+            </ng-container>
+
+            <!-- Ratings Grid -->
+            <div class="col-12">
+              <div class="rating-grid">
+                <!-- Rating 1 -->
+                <div class="rating-box">
+                  <label class="form-label">{{ categoryMeta[category].ratings[0] }}</label>
+                  <select formControlName="rating1" class="form-select">
+                    <option [value]="5">5 / 5</option>
+                    <option [value]="4">4 / 5</option>
+                    <option [value]="3">3 / 5</option>
+                    <option [value]="2">2 / 5</option>
+                    <option [value]="1">1 / 5</option>
+                  </select>
+                </div>
+                
+                <!-- Rating 2 -->
+                <div class="rating-box">
+                  <label class="form-label">{{ categoryMeta[category].ratings[1] }}</label>
+                  <select formControlName="rating2" class="form-select">
+                    <option [value]="5">5 / 5</option>
+                    <option [value]="4">4 / 5</option>
+                    <option [value]="3">3 / 5</option>
+                    <option [value]="2">2 / 5</option>
+                    <option [value]="1">1 / 5</option>
+                  </select>
+                </div>
+
+                <!-- Rating 3 -->
+                <div class="rating-box">
+                  <label class="form-label">{{ categoryMeta[category].ratings[2] }}</label>
+                  <select formControlName="rating3" class="form-select">
+                    <option [value]="5">5 / 5</option>
+                    <option [value]="4">4 / 5</option>
+                    <option [value]="3">3 / 5</option>
+                    <option [value]="2">2 / 5</option>
+                    <option [value]="1">1 / 5</option>
+                  </select>
+                </div>
+
+                <!-- Rating 4 -->
+                <div class="rating-box">
+                  <label class="form-label">{{ categoryMeta[category].ratings[3] }}</label>
+                  <select formControlName="rating4" class="form-select">
+                    <option [value]="5">5 / 5</option>
+                    <option [value]="4">4 / 5</option>
+                    <option [value]="3">3 / 5</option>
+                    <option [value]="2">2 / 5</option>
+                    <option [value]="1">1 / 5</option>
+                  </select>
+                </div>
+
+                <!-- Rating Overall -->
+                <div class="rating-box">
+                  <label class="form-label">{{ categoryMeta[category].ratings[4] }}</label>
+                  <select formControlName="ratingOverall" class="form-select">
+                    <option [value]="5">5 / 5</option>
+                    <option [value]="4">4 / 5</option>
+                    <option [value]="3">3 / 5</option>
+                    <option [value]="2">2 / 5</option>
+                    <option [value]="1">1 / 5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comment and Suggestion -->
+            <div class="col-12">
+              <label class="form-label">Comment for Sentiment Analysis</label>
+              <textarea formControlName="comment" rows="5" class="form-control form-control-lg" placeholder="Write clear feedback. The system will classify it as Positive, Neutral or Negative."></textarea>
+              <div *ngIf="feedbackForm.controls.comment.invalid && feedbackForm.controls.comment.touched" class="form-text text-danger">Comment must be 5 to 1200 characters.</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Improvement Suggestion</label>
+              <textarea formControlName="suggestion" rows="3" class="form-control" placeholder="Optional suggestion for improvement"></textarea>
+            </div>
+
+            <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
+              <button type="submit" [disabled]="feedbackForm.invalid || isSubmitting()" class="btn btn-brand btn-lg px-4">
+                <i class="fa-solid fa-paper-plane me-2"></i>{{ isSubmitting() ? 'Submitting...' : 'Submit ' + categoryLabels[category].replace(' Feedback','') + ' Feedback' }}
+              </button>
+              <span class="small text-muted"><i class="fa-solid fa-lock me-1"></i>Your degree, year and section are attached automatically.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Sidebar Information and History -->
+      <div class="col-xl-4 col-lg-4">
+        <div class="feedback-side-stack">
+          <div class="glass-card p-4 reveal-up delay-2">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-circle-nodes me-2"></i>How this works</h5>
+            <div class="timeline-mini">
+              <div><span>1</span><p>Student submits rating and comment.</p></div>
+              <div><span>2</span><p>System calculates average rating.</p></div>
+              <div><span>3</span><p>Comment is analyzed as Positive, Neutral or Negative.</p></div>
+              <div><span>4</span><p>Admin dashboard shows final percentage reports.</p></div>
+            </div>
+          </div>
+
+          <div class="glass-card p-4 reveal-up delay-3">
+            <h5 class="fw-bold mb-3">Your Recent Feedback History</h5>
+            <div *ngIf="recentFeedbacks().length === 0" class="empty-state">No feedback submitted yet.</div>
+            <div *ngFor="let item of recentFeedbacks()" class="mini-row feedback-recent-row">
+              <div>
+                <strong>{{ item.category | uppercase }}</strong>
+                <br>
+                <span class="small text-muted">{{ item.targetName || 'General' }} • Avg: {{ item.averageRating }}</span>
+              </div>
+              <span class="sentiment-pill" [class]="item.sentiment.toLowerCase()">{{ item.sentiment }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

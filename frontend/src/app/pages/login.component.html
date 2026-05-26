@@ -1,0 +1,65 @@
+<section class="auth-shell student-login-shell">
+  <div class="login-orb login-orb-one"></div>
+  <div class="login-orb login-orb-two"></div>
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-xl-9 col-lg-10">
+        <div class="auth-frame login-card p-0">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-lg-5 d-none d-lg-block">
+              <div class="login-info-panel h-100">
+                <span class="login-mini-badge"><i class="fa-solid fa-shield-halved"></i> AU Secure Access</span>
+                <h2>Welcome back to PollPulse.</h2>
+                <p>Login to vote in CR/GR polls, submit feedback and view final class results when polls are closed.</p>
+                <div class="login-benefits">
+                  <div><i class="fa-solid fa-check"></i><span>Official student email only</span></div>
+                  <div><i class="fa-solid fa-check"></i><span>Class-wise polling access</span></div>
+                  <div><i class="fa-solid fa-check"></i><span>Feedback and sentiment reports</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="login-form-panel p-4 p-md-5">
+                <div class="login-form-icon mb-3"><i class="fa-solid fa-user-graduate"></i></div>
+                <h1 class="fw-black mb-2">Student Login</h1>
+                <p class="text-muted mb-4">Use your official Air University student email to continue.</p>
+
+                <div *ngIf="errorMessage()" class="alert alert-danger rounded-4">
+                  {{ errorMessage() }}
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row g-3">
+                  <div class="col-12">
+                    <label class="form-label">University Email</label>
+                    <div class="input-icon-wrap">
+                      <i class="fa-regular fa-envelope"></i>
+                      <input formControlName="email" type="email" class="form-control form-control-lg" placeholder="2502077@students.au.edu.pk">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Password</label>
+                    <div class="input-icon-wrap">
+                      <i class="fa-solid fa-lock"></i>
+                      <input formControlName="password" type="password" class="form-control form-control-lg" placeholder="Enter your password">
+                    </div>
+                  </div>
+                  <div class="col-12 d-flex justify-content-between align-items-center login-help-row">
+                    <span><i class="fa-solid fa-circle-check me-1"></i> Student access portal</span>
+                    <a routerLink="/contact">Need help?</a>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" [disabled]="loginForm.invalid || isLoading()" class="btn btn-brand btn-lg w-100 login-submit-btn">
+                      {{ isLoading() ? 'Logging in...' : 'Log In' }}
+                    </button>
+                  </div>
+                </form>
+                <p class="mt-4 mb-0 small text-muted">New student? <a class="fw-bold" routerLink="/register">Create account</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

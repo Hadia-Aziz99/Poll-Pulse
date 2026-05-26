@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+  <div>
+    <span class="hero-kicker">Admin Dashboard</span>
+    <h1 class="fw-black">CS Department Overview</h1>
+  </div>
+  <a routerLink="/admin/elections/create" class="btn btn-brand"><i class="fa-solid fa-plus me-2"></i>Create Election</a>
+</div>
+
+<div *ngIf="isLoading()" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading()">
+  <div class="row g-4 mb-4">
+    <div class="col-md-4 col-xl-2"><div class="metric-card"><span>{{ dashboardData().metrics.totalStudents }}</span><small>Students</small></div></div>
+    <div class="col-md-4 col-xl-2"><div class="metric-card"><span>{{ dashboardData().metrics.activeElections }}</span><small>Active Elections</small></div></div>
+    <div class="col-md-4 col-xl-2"><div class="metric-card"><span>{{ dashboardData().metrics.closedElections }}</span><small>Closed Elections</small></div></div>
+    <div class="col-md-4 col-xl-2"><div class="metric-card"><span>{{ dashboardData().metrics.totalVotes }}</span><small>Total Votes</small></div></div>
+    <div class="col-md-4 col-xl-2"><div class="metric-card"><span>{{ dashboardData().metrics.totalFeedback }}</span><small>Feedback</small></div></div>
+    <div class="col-md-4 col-xl-2"><div class="metric-card"><span>{{ dashboardData().metrics.sentiment.positive }}%</span><small>Positive</small></div></div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="admin-card p-4 mb-4">
+        <h4 class="fw-bold mb-3">Recent Elections</h4>
+        <div *ngIf="dashboardData().recentElections.length === 0" class="empty-state">No elections created yet.</div>
+        <div *ngFor="let election of dashboardData().recentElections" class="list-card mb-3">
+          <div>
+            <strong>{{ election.title }}</strong>
+            <br>
+            <span class="small text-muted">{{ election.electionType }} • {{ election.classKey }}</span>
+          </div>
+          <span class="status-badge" [class]="election.status">{{ election.status }}</span>
+        </div>
+      </div>
+
+      <div class="admin-card p-4">
+        <h4 class="fw-bold mb-3">Recent System Audit Logs</h4>
+        <div *ngIf="dashboardData().recentLogs.length === 0" class="empty-state">No audit logs available.</div>
+        <div *ngFor="let log of dashboardData().recentLogs" class="list-card mb-2 py-2">
+          <div>
+            <span class="badge bg-secondary me-2">{{ log.action }}</span>
+            <span class="small text-muted">{{ log.actor.name }} ({{ log.actor.role }})</span>
+            <p class="mb-0 mt-1 small">{{ log.details }}</p>
+          </div>
+          <span class="small text-muted">{{ log.createdAt | date:'shortTime' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="admin-card p-4">
+        <h4 class="fw-bold">Department Sentiment Summary</h4>
+        <div class="sentiment-bar my-3">
+          <div class="positive" [ngStyle]="{'width': dashboardData().metrics.sentiment.positive + '%'}"></div>
+          <div class="neutral" [ngStyle]="{'width': dashboardData().metrics.sentiment.neutral + '%'}"></div>
+          <div class="negative" [ngStyle]="{'width': dashboardData().metrics.sentiment.negative + '%'}"></div>
+        </div>
+        <div class="mini-row"><strong>Positive</strong><span>{{ dashboardData().metrics.sentiment.positive }}%</span></div>
+        <div class="mini-row"><strong>Neutral</strong><span>{{ dashboardData().metrics.sentiment.neutral }}%</span></div>
+        <div class="mini-row"><strong>Negative</strong><span>{{ dashboardData().metrics.sentiment.negative }}%</span></div>
+      </div>
+    </div>
+  </div>
+</div>

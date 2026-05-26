@@ -1,0 +1,117 @@
+erDiagram
+    ADMINS ||--o{ ELECTIONS : creates
+    USERS ||--o{ VOTES : casts
+    USERS ||--o{ FEEDBACKS : submits
+    CLASSSECTIONS ||--o{ USERS : contains
+    CLASSSECTIONS ||--o{ ELECTIONS : has
+    ELECTIONS ||--o{ CANDIDATES : includes
+    ELECTIONS ||--o{ VOTES : receives
+    CANDIDATES ||--o{ VOTES : selected_in
+    TEACHERS ||--o{ FEEDBACKS : receives_teacher_feedback
+    COURSES ||--o{ FEEDBACKS : receives_course_feedback
+    EVENTS ||--o{ FEEDBACKS : receives_event_feedback
+    USERS ||--o{ AUDITLOGS : generates
+    ADMINS ||--o{ AUDITLOGS : generates
+
+    ADMINS {
+      objectId _id
+      string name
+      string email
+      string passwordHash
+      string role
+      string status
+    }
+
+    USERS {
+      objectId _id
+      string name
+      string email
+      string rollNo
+      string degree
+      int year
+      string section
+      string classKey
+      string role
+    }
+
+    CLASSSECTIONS {
+      objectId _id
+      string degree
+      int year
+      string section
+      string classKey
+      string title
+      bool isActive
+    }
+
+    ELECTIONS {
+      objectId _id
+      string title
+      string electionType
+      string classKey
+      string status
+      datetime startAt
+      datetime endAt
+      objectId createdBy
+    }
+
+    CANDIDATES {
+      objectId _id
+      objectId election
+      string name
+      string rollNo
+      bool isActive
+    }
+
+    VOTES {
+      objectId _id
+      objectId election
+      objectId candidate
+      objectId user
+      string classKey
+      datetime createdAt
+    }
+
+    FEEDBACKS {
+      objectId _id
+      objectId user
+      string category
+      string targetName
+      objectId teacher
+      objectId course
+      objectId event
+      array ratings
+      double averageRating
+      object sentiment
+    }
+
+    TEACHERS {
+      objectId _id
+      string name
+      string email
+      string department
+    }
+
+    COURSES {
+      objectId _id
+      string code
+      string title
+      string degree
+      int year
+    }
+
+    EVENTS {
+      objectId _id
+      string name
+      datetime eventDate
+      string status
+    }
+
+    AUDITLOGS {
+      objectId _id
+      objectId actor
+      string actorModel
+      string action
+      string entityType
+      datetime createdAt
+    }

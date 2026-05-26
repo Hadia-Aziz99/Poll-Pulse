@@ -1,0 +1,38 @@
+<div class="admin-card p-4 p-md-5">
+  <div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+    <div>
+      <span class="category-pill">{{ resultsData()?.election?.electionType }} • Admin View</span>
+      <h1 class="fw-black mt-2">{{ resultsData()?.election?.title }}</h1>
+      <p class="text-muted">Total Votes: {{ resultsData()?.totalVotes }}</p>
+    </div>
+    <span *ngIf="resultsData()?.election" class="status-badge" [class]="resultsData().election.status">{{ resultsData()?.election?.status }}</span>
+  </div>
+
+  <div *ngIf="isLoading()" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage()" class="alert alert-danger rounded-4">{{ errorMessage() }}</div>
+
+  <div *ngIf="!isLoading() && resultsData()">
+    <div *ngIf="resultsData().election?.status !== 'closed'" class="alert alert-warning">
+      This is not final yet. Close the election to publish final result.
+    </div>
+
+    <div *ngIf="resultsData().winner && resultsData().election?.status === 'closed'" class="winner-box mb-4">
+      <i class="fa-solid fa-trophy me-2"></i>Final Winner: <strong>{{ resultsData().winner.name }}</strong>
+    </div>
+
+    <div *ngFor="let row of resultsData().results" class="result-row mb-3">
+      <div class="d-flex justify-content-between">
+        <strong>{{ row.name }}</strong>
+        <span>{{ row.votes }} votes • {{ row.percentage }}%</span>
+      </div>
+      <div class="progress mt-2">
+        <div class="progress-bar" [ngStyle]="{'width': row.percentage + '%'}"></div>
+      </div>
+    </div>
+  </div>
+</div>

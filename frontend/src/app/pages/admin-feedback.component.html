@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+  <div>
+    <span class="hero-kicker">Admin Control Center</span>
+    <h1 class="fw-black">Student Feedback Records</h1>
+  </div>
+</div>
+
+<div class="admin-card p-4 mb-4">
+  <h4 class="fw-bold mb-3"><i class="fa-solid fa-filter me-2 text-primary"></i>Filter Feedback</h4>
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="row g-3 align-items-end">
+    <div class="col-md-4">
+      <label class="form-label">Category</label>
+      <select class="form-select" formControlName="category" (change)="applyFilters()">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of categories" [value]="cat.value">{{ cat.label }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Sentiment</label>
+      <select class="form-select" formControlName="sentiment" (change)="applyFilters()">
+        <option value="">All Sentiments</option>
+        <option *ngFor="let sent of sentiments" [value]="sent">{{ sent }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+      <button type="submit" class="btn btn-brand w-100"><i class="fa-solid fa-arrows-rotate me-2"></i>Refresh</button>
+      <button type="button" class="btn btn-outline-secondary w-100" (click)="resetFilters()"><i class="fa-solid fa-filter-circle-xmark me-2"></i>Reset</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="isLoading()" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading()">
+  <div *ngIf="feedbacks().length === 0" class="admin-card p-5 text-center">
+    <div class="mb-3 text-muted" style="font-size: 3rem;"><i class="fa-regular fa-comment-dots"></i></div>
+    <h5 class="fw-bold">No Feedback Found</h5>
+    <p class="text-muted mb-0">No student feedback records matched the chosen filters.</p>
+  </div>
+
+  <div class="row g-4" *ngIf="feedbacks().length > 0">
+    <div class="col-12" *ngFor="let item of feedbacks()">
+      <div class="admin-card p-4">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+          <div>
+            <span class="badge bg-primary text-uppercase me-2" style="font-size: 0.75rem; letter-spacing: 0.05em;">{{ item.category }}</span>
+            <span class="fw-bold text-dark fs-5">{{ item.targetName }}</span>
+            <div class="small text-muted mt-1">
+              <span class="me-3"><i class="fa-regular fa-user me-1"></i>{{ item.user?.name || 'Anonymous Student' }}</span>
+              <span><i class="fa-solid fa-users-rectangle me-1"></i>{{ item.classKey }}</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column align-items-end gap-1">
+            <span class="badge rounded-pill px-3 py-1" [ngClass]="getSentimentClass(item.sentiment?.label)">
+              <i class="fa-solid me-1" [ngClass]="item.sentiment?.label === 'Positive' ? 'fa-face-smile' : item.sentiment?.label === 'Negative' ? 'fa-face-frown' : 'fa-face-meh'"></i>
+              {{ item.sentiment?.label }} ({{ item.sentiment?.score > 0 ? '+' : '' }}{{ item.sentiment?.score }})
+            </span>
+            <span class="small text-muted">{{ item.createdAt | date:'mediumDate' }}</span>
+          </div>
+        </div>
+
+        <div class="row g-3 align-items-center mb-3">
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-1 bg-light border rounded-3 px-3 py-2">
+              <i class="fa-solid fa-star text-warning"></i>
+              <span class="fw-bold fs-5 text-dark">{{ item.averageRating }}</span>
+              <span class="text-muted" style="font-size: 0.8rem;">/ 5</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex gap-2 flex-wrap">
+              <span *ngFor="let rating of item.ratings" class="badge bg-light text-dark border px-2 py-1 small">
+                {{ rating.label }}: <strong>{{ rating.value }}</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-light rounded-4 p-3 mb-2 border-start border-primary border-3">
+          <h6 class="fw-bold small text-muted text-uppercase mb-1" style="letter-spacing: 0.05em;">Comment</h6>
+          <p class="mb-0 text-dark" style="white-space: pre-wrap; font-size: 0.95rem; line-height: 1.5;">{{ item.comment }}</p>
+        </div>
+
+        <div *ngIf="item.suggestion" class="bg-light rounded-4 p-3 border-start border-success border-3">
+          <h6 class="fw-bold small text-muted text-uppercase mb-1" style="letter-spacing: 0.05em;">Suggestion</h6>
+          <p class="mb-0 text-dark" style="white-space: pre-wrap; font-size: 0.95rem; line-height: 1.5;">{{ item.suggestion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
