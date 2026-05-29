@@ -1,5 +1,5 @@
-import { Component, OnInit, inject, signal, effect, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { FeedbackService } from '../services/feedback.service';
 import { NgIf, NgFor, NgClass, UpperCasePipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -20,8 +20,9 @@ interface CategoryMeta {
 })
 export class FeedbackComponent implements OnInit {
   private readonly feedbackService = inject(FeedbackService);
+  private readonly route = inject(ActivatedRoute);
 
-  @Input() category = 'faculty'; // Bound from path parameter :category
+  category = 'faculty'; // Updated reactively from route params
 
   categoryLabels: { [key: string]: string } = {
     faculty: 'Faculty Feedback',
@@ -117,16 +118,17 @@ export class FeedbackComponent implements OnInit {
   isLoading = signal(true);
   isSubmitting = signal(false);
 
-  constructor() {
-    effect(() => {
-      if (this.category) {
+
+  ngOnInit(): void {
+    // Subscribe to route param changes so clicking category buttons actually works
+    this.route.paramMap.subscribe(params => {
+      const cat = params.get('category');
+      if (cat && this.categoryMeta[cat]) {
+        this.category = cat;
         this.resetForm();
         this.updateTargetValidators();
       }
-    }, { allowSignalWrites: true });
-  }
-
-  ngOnInit(): void {
+    });
     this.loadData();
     this.updateTargetValidators();
   }
