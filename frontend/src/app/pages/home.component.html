@@ -5,11 +5,15 @@
       <div class="col-xl-7 col-lg-7">
         <div class="hero-copy reveal-up">
           <span class="hero-kicker"><i class="fa-solid fa-graduation-cap me-2"></i>University live voice system</span>
-          <h1 class="display-3 fw-black mt-4 mb-3">Make every <span class="gradient-text">student voice</span> visible.</h1>
-          <p class="lead hero-lead mb-4">A secure Air University CS portal for CR/GR selection, teacher reviews, course feedback, campus facilities, event feedback and final sentiment percentage reports.</p>
+          <h1 class="display-3 fw-black mt-4 mb-3">Make every <span class="gradient-text">student voice</span> visible.
+          </h1>
+          <p class="lead hero-lead mb-4">A secure Air University CS portal for CR/GR selection, teacher reviews, course
+            feedback, campus facilities, event feedback and final sentiment percentage reports.</p>
           <div class="d-flex flex-wrap gap-3 mb-4">
-            <a routerLink="/register" class="btn btn-brand btn-lg px-4"><i class="fa-solid fa-user-plus me-2"></i>Register with AU Email</a>
-            <a routerLink="/login" class="btn btn-ghost-dark btn-lg px-4"><i class="fa-solid fa-right-to-bracket me-2"></i>Student Login</a>
+            <a routerLink="/register" class="btn btn-brand btn-lg px-4"><i
+                class="fa-solid fa-user-plus me-2"></i>Register with AU Email</a>
+            <a routerLink="/login" class="btn btn-ghost-dark btn-lg px-4"><i
+                class="fa-solid fa-right-to-bracket me-2"></i>Student Login</a>
           </div>
           <div class="hero-trust-row">
             <span><i class="fa-solid fa-check"></i> AU email protected</span>
@@ -28,10 +32,19 @@
             <span class="live-dot"><i></i>Live</span>
           </div>
           <div class="row g-3 mt-2">
-            <div class="col-6"><div class="mini-stat"><span>{{ metrics().activeElections }}</span><small>Active Elections</small></div></div>
-            <div class="col-6"><div class="mini-stat"><span>{{ metrics().closedElections }}</span><small>Closed Results</small></div></div>
-            <div class="col-6"><div class="mini-stat"><span>{{ metrics().totalFeedback }}</span><small>Feedback Records</small></div></div>
-            <div class="col-6"><div class="mini-stat highlight"><span>{{ metrics().sentiment.positive }}%</span><small>Positive Sentiment</small></div></div>
+            <div class="col-6">
+              <div class="mini-stat"><span>{{ metrics().activeElections }}</span><small>Active Elections</small></div>
+            </div>
+            <div class="col-6">
+              <div class="mini-stat"><span>{{ metrics().closedElections }}</span><small>Closed Results</small></div>
+            </div>
+            <div class="col-6">
+              <div class="mini-stat"><span>{{ metrics().totalFeedback }}</span><small>Feedback Records</small></div>
+            </div>
+            <div class="col-6">
+              <div class="mini-stat highlight"><span>{{ metrics().sentiment.positive }}%</span><small>Positive
+                  Sentiment</small></div>
+            </div>
           </div>
           <div class="sentiment-card mt-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -44,12 +57,16 @@
               <div class="negative" [ngStyle]="{'width': metrics().sentiment.negative + '%'}"></div>
             </div>
             <div class="row g-2 mt-3 small fw-bold">
-              <div class="col-4"><span class="legend-dot positive"></span>Positive {{ metrics().sentiment.positive }}%</div>
-              <div class="col-4"><span class="legend-dot neutral"></span>Neutral {{ metrics().sentiment.neutral }}%</div>
-              <div class="col-4"><span class="legend-dot negative"></span>Negative {{ metrics().sentiment.negative }}%</div>
+              <div class="col-4"><span class="legend-dot positive"></span>Positive {{ metrics().sentiment.positive }}%
+              </div>
+              <div class="col-4"><span class="legend-dot neutral"></span>Neutral {{ metrics().sentiment.neutral }}%
+              </div>
+              <div class="col-4"><span class="legend-dot negative"></span>Negative {{ metrics().sentiment.negative }}%
+              </div>
             </div>
           </div>
-          <div class="preview-note mt-3"><i class="fa-solid fa-circle-info me-2"></i>When voting closes, final winners and sentiment percentages are shown.</div>
+          <div class="preview-note mt-3"><i class="fa-solid fa-circle-info me-2"></i>When voting closes, final winners
+            and sentiment percentages are shown.</div>
         </div>
       </div>
     </div>
@@ -64,36 +81,65 @@
   </div>
   <div class="feedback-hub-grid">
     <a class="feedback-hub-card" routerLink="/feedback/faculty">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Faculty administration feedback"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-building-columns"></i></span><strong>Faculty</strong><span>Administration and department support</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1758685734622-3e0a002b2f53?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"
+        role="img" aria-label="Faculty administration feedback"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-building-columns"></i></span><strong>Faculty</strong><span>Administration and department
+          support</span></div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/teacher">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Teacher feedback classroom"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-chalkboard-user"></i></span><strong>Teachers</strong><span>Teaching quality and behavior</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Teacher feedback classroom"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-chalkboard-user"></i></span><strong>Teachers</strong><span>Teaching quality and
+          behavior</span></div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/course">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Course feedback study material"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-book-open-reader"></i></span><strong>Courses</strong><span>Difficulty, content and assessments</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Course feedback study material"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-book-open-reader"></i></span><strong>Courses</strong><span>Difficulty, content and
+          assessments</span></div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/transport">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Campus transport feedback"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-bus"></i></span><strong>Transport</strong><span>Routes, timing and safety</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Campus transport feedback"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-bus"></i></span><strong>Transport</strong><span>Routes, timing and safety</span></div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/cafeteria">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Cafeteria feedback"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-utensils"></i></span><strong>Cafeteria</strong><span>Food, price and cleanliness</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Cafeteria feedback"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-utensils"></i></span><strong>Cafeteria</strong><span>Food, price and cleanliness</span>
+      </div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/sports">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Sports facilities feedback"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-futbol"></i></span><strong>Sports</strong><span>Facilities and equipment</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Sports facilities feedback"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-futbol"></i></span><strong>Sports</strong><span>Facilities and equipment</span></div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/library">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Library feedback"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-book"></i></span><strong>Library</strong><span>Books, seating and timings</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Library feedback"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-book"></i></span><strong>Library</strong><span>Books, seating and timings</span></div>
     </a>
     <a class="feedback-hub-card" routerLink="/feedback/event">
-      <div class="feedback-card-image" style="--card-bg: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&amp;fit=crop&amp;w=1600&amp;q=82');" role="img" aria-label="Campus event feedback"></div>
-      <div class="feedback-card-body"><span class="feedback-card-icon"><i class="fa-solid fa-calendar-check"></i></span><strong>Events</strong><span>Seminars, trips and activities</span></div>
+      <div class="feedback-card-image"
+        style="--card-bg: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=82');"
+        role="img" aria-label="Campus event feedback"></div>
+      <div class="feedback-card-body"><span class="feedback-card-icon"><i
+            class="fa-solid fa-calendar-check"></i></span><strong>Events</strong><span>Seminars, trips and
+          activities</span></div>
     </a>
   </div>
 </section>
@@ -104,7 +150,8 @@
       <div class="feature-panel highlight-panel h-100 reveal-up">
         <span class="panel-number">01</span>
         <h3>CR/GR selection per section</h3>
-        <p>Students vote only in their own BSCS/BSIT year and section. This keeps election results fair and class-specific.</p>
+        <p>Students vote only in their own BSCS/BSIT year and section. This keeps election results fair and
+          class-specific.</p>
         <a routerLink="/elections" class="btn btn-ghost-dark btn-sm">View Elections</a>
       </div>
     </div>
@@ -112,7 +159,8 @@
       <div class="feature-panel h-100 reveal-up delay-1">
         <span class="panel-number">02</span>
         <h3>Structured feedback forms</h3>
-        <p>Every category has rating criteria, comment box and suggestion field so reports are more useful for administration.</p>
+        <p>Every category has rating criteria, comment box and suggestion field so reports are more useful for
+          administration.</p>
         <a routerLink="/feedback/teacher" class="btn btn-brand btn-sm">Submit Feedback</a>
       </div>
     </div>
@@ -120,7 +168,8 @@
       <div class="feature-panel h-100 reveal-up delay-2">
         <span class="panel-number">03</span>
         <h3>Final sentiment report</h3>
-        <p>After feedback is submitted, comments are classified as Positive, Neutral or Negative and shown as percentages.</p>
+        <p>After feedback is submitted, comments are classified as Positive, Neutral or Negative and shown as
+          percentages.</p>
         <a routerLink="/about" class="btn btn-ghost-dark btn-sm">Learn More</a>
       </div>
     </div>
@@ -133,13 +182,20 @@
       <div class="col-lg-5">
         <span class="hero-kicker dark-kicker"><i class="fa-solid fa-layer-group me-2"></i>Department Coverage</span>
         <h2 class="fw-black mt-3">Built specifically for BSCS and BSIT students.</h2>
-        <p class="text-muted mb-0">PollPulse keeps elections and feedback organized by degree, year and section, so students only see the forms that matter to their own class.</p>
+        <p class="text-muted mb-0">PollPulse keeps elections and feedback organized by degree, year and section, so
+          students only see the forms that matter to their own class.</p>
       </div>
       <div class="col-lg-7">
         <div class="row g-3 text-center">
-          <div class="col-md-4"><div class="coverage-stat"><span>2</span><small>Degree Programs</small></div></div>
-          <div class="col-md-4"><div class="coverage-stat"><span>6</span><small>Years / Classes</small></div></div>
-          <div class="col-md-4"><div class="coverage-stat"><span>36</span><small>Total Sections</small></div></div>
+          <div class="col-md-4">
+            <div class="coverage-stat"><span>2</span><small>Degree Programs</small></div>
+          </div>
+          <div class="col-md-4">
+            <div class="coverage-stat"><span>6</span><small>Years / Classes</small></div>
+          </div>
+          <div class="col-md-4">
+            <div class="coverage-stat"><span>36</span><small>Total Sections</small></div>
+          </div>
         </div>
       </div>
     </div>
