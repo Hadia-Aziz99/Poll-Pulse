@@ -20,8 +20,11 @@
           </div>
           <div class="col-lg-8">
             <div *ngIf="submitted()" class="alert alert-success rounded-4 mb-3">
-              Thank you. Your message has been noted.
-            </div>
+              Thank you. Your message has been saved successfully.
+              </div>
+            <div *ngIf="errorMessage()" class="alert alert-danger rounded-4 mb-3">
+            {{ errorMessage() }}
+              </div>
             <form [formGroup]="contactForm" (ngSubmit)="submit()" class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Name</label>
@@ -49,7 +52,9 @@
                   <div *ngIf="contactForm.controls.message.invalid && contactForm.controls.message.touched" class="form-text text-danger">Message must be at least 5 characters.</div>
               </div>
               <div class="col-12">
-                <button type="submit" [disabled]="contactForm.invalid" class="btn btn-brand px-4">Submit Message</button>
+                <button type="submit" [disabled]="contactForm.invalid || isSubmitting()" class="btn btn-brand px-4">
+                {{ isSubmitting() ? 'Submitting...' : 'Submit Message' }}
+              </button>
               </div>
             </form>
           </div>

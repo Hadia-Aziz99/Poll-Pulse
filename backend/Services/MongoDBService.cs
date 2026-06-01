@@ -36,7 +36,8 @@ namespace PollpulseBackend.Services
         public IMongoCollection<Candidate> Candidates => _database.GetCollection<Candidate>("candidates");
         public IMongoCollection<Vote> Votes => _database.GetCollection<Vote>("votes");
         public IMongoCollection<Feedback> Feedbacks => _database.GetCollection<Feedback>("feedbacks");
-        public IMongoCollection<AuditLog> AuditLogs => _database.GetCollection<AuditLog>("auditlogs");
+public IMongoCollection<ContactMessage> ContactMessages => _database.GetCollection<ContactMessage>("contactmessages");
+public IMongoCollection<AuditLog> AuditLogs => _database.GetCollection<AuditLog>("auditlogs");
 
 
 
@@ -79,6 +80,10 @@ namespace PollpulseBackend.Services
             await SafeCreateIndex(Feedbacks, new CreateIndexModel<Feedback>(
                 Builders<Feedback>.IndexKeys.Ascending(f => f.User).Ascending(f => f.Category).Descending(f => f.CreatedAt),
                 new CreateIndexOptions { Name = "ix_feedback_user_category_created" }
+            ));
+            await SafeCreateIndex(ContactMessages, new CreateIndexModel<ContactMessage>(
+            Builders<ContactMessage>.IndexKeys.Ascending(c => c.Email).Descending(c => c.CreatedAt),
+            new CreateIndexOptions { Name = "ix_contact_email_created" }
             ));
         }
 
